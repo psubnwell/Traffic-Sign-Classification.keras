@@ -4,9 +4,9 @@
 
 * Since `Keras 2` was released, so I just rewrote the code in new APIs and switched backend of `keras` to `tensorflow`. (Use `tensorflow`-styled data format, ie, `tf`/`channels_last`)
 
-* I prefer a pure text interface, and think `Jupyter Notebook` a little bit clumsy though it's a creative tool. So I rewrote the code in `.py` simply, keeping the original author's `.ipynb`. Pick one that fit your preference.
+* I prefer a pure text interface, and think `Jupyter Notebook` a little bit clumsy though it's a creative tool. So I rewrote the code in `.py` script simply.
 
-## Old (chsasank's) README
+## Original Author's (chsasank's) README
 
 Code for CNNs to solve The German Traffic Sign Recognition Benchmark(GTSRB) in keras. 
 A blog post explaining the code is availabe at https://chsasank.github.io/keras-tutorial.html
