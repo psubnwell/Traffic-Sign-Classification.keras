@@ -67,8 +67,7 @@ def cnn_model():
     model.add(Dense(NUM_CLASSES, activation='softmax'))
     return model
 
-
-def main():
+def train():
     root_dir = os.path.expanduser('~/dataset/GTSRB/Final_Training/Images/')
         # expanduser() lets python know the meaning of "~" 
     imgs = []
@@ -105,6 +104,10 @@ def main():
               callbacks=[LearningRateScheduler(lr_schedule), 
                          ModelCheckpoint('model.h5', save_best_only=True)])
 
+def test():
+    model = cnn_model()
+    model.load_weights('model.h5')
+
     # Evaluation
     test = pd.read_csv(os.path.expanduser('~/dataset/GTSRB/GT-final_test.csv'), sep=';')
 
@@ -113,8 +116,8 @@ def main():
     Y_test = []
     i = 0
     for file_name, class_id in zip(list(test['Filename']), list(test['ClassId'])):
-        img_path = os.path.join(os.path.expenduser('~/dataset/GTSRB/Final_Test/Images/'),
-                                file_name)
+        img_path = os.path.join('~/dataset/GTSRB/Final_Test/Images/', file_name)
+        img_path = os.path.expanduser(img_path)
         X_test.append(preprocess_img(io.imread(img_path)))
         Y_test.append(class_id)
 
@@ -125,6 +128,10 @@ def main():
     Y_pred = model.predict_classes(X_test)
     acc = np.sum(Y_pred == Y_test) / np.size(Y_pred)
     print("Test accuracy = {}".format(acc))
+
+def main():
+    train()
+    test()
 
 if __name__ == '__main__':
     main()
